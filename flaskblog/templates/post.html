@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ post.author.username }}</a>
+        <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
+        {% if current_user.role == 'Manager' and post.verify_or_decline == 'pending' %} 
+          <div>
+            <a class="btn btn-success btn-sm mt-1 mb-1" href="{{ url_for('verify', post_id=post.id) }}">Verify</a>
+            or 
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{{ url_for('decline', post_id=post.id) }}">Decline</a>
+          </div>
+        {% endif %}
+      </div>
+      {% if post.receipt_file %}
+        <img class="rounded-0 article-img-receipt" src=" data:;base64, {{ image | safe }}" width="300" height="350" >
+      {% endif %}
+      <h2 class="article-title">{{ post.client_name }}</h2>
+      <p class="article-content">Client: {{ post.client_or_saggezza }}</p>
+      <p class="article-content">Appointment Date: {{ post.date.strftime('%d-%m-%Y') }}</p>
+      <p class="article-content">Client Project: {{ post.client_project }}</p>
+      <p class="article-content">Billable to client: {{ post.billable_to }}</p>
+      <p class="article-content">Payment: {{ post.payment }}</p>
+      <p class="article-content">Receipt: {{ post.receipt }}</p>
+      <p class="article-content">Category: {{ post.category }}</p>
+      <p class="article-content">Description: {{ post.description }}</p>
+      {% if current_user == post.author %}
+        <div class="btn-upload-img">
+          <form method="POST" action="{{ url_for('upload', post_id=post.id) }}" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="inputFile">Image input</label>
+            <input type="file" name="inputFile">
+          </div>
+          <button type="submit" class="btn btn-info btn-sm mt-1 mb-1">Upload</button>
+          </form>
+        </div>
+      {% endif %}
+      <p class="article-content">Amount GBP: £ {{ post.GBP }}</p>
+      {% if post.EUR == '' %}
+      <p class="article-content">Amount EUR: € 0</p>
+      {% else %}
+      <p class="article-content">Amount EUR: € {{ post.EUR }}</p>
+      {% endif %}
+      {% if post.USD == '' %}
+      <p class="article-content">Amount USD: $ 0</p>
+      {% else %}
+      <p class="article-content">Amount USD: $ {{ post.USD }}</p>
+      {% endif %}
+      {% if current_user.role == 'Admin' and post.verify_or_decline == 'pending' %}
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Edit</a>
+      {% endif %}
+    </div>
+  </article>
+{% endblock content %}

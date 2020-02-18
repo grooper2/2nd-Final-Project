@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>About Page</h1>
+    <div class="content-section2">
+        <nav id="navbar-example2" class="navbar navbar-dark bg-dark bg-steel ">
+            <a class="navbar-brand" href="">Guidence</a>
+            <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#Admin">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Manager">Manager</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#User">User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#How">How to use</a>
+            </li>
+            </ul>
+        </nav>
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+            <h4 id="Admin">Admin</h4>
+            <p>The role of the Admin is very simple, Admins only can register people into the Web
+            Application, also, Admins can do the same things as simple Users do for example: 
+            They can create expenses. Another feature of the Admin role is that they can edit an
+            expense that has been made from another user but the can only edit only the "Client Project"
+            and "Saggezza or Client" fields. </p>
+
+            <h4 id="Manager">Manager</h4>
+            <p>The Manager role is simplier than the Admins role. How is that ? Whenever an 
+            expense is made the current status of that expense is "Pending" so the manager has to 
+            open the expense and review it, if it's okay for him/her they can click on the verify 
+            button to verify the current expense that they are viewing.</p>
+
+            <h4 id="User">User</h4>
+            <p>Now the User role is limited to only create expenses unlike the other two roles.
+            Also do not try to access pages that no Users are allowed you will get error "403"
+            Access Forbidden. 
+            </p>
+
+            <h4 id="How">How the web Application works</h4>
+            <p>To use the web application you have to login first if you dont have an account 
+            contact to your company to make you one. Once you logged in you will see at the top
+            right that you have "Create Expense", "Account" and "Logout" if your role is Manager
+            or User, if your role is Admin then you will have one more that says "Register" because
+            only the ones with the "Admin" role can register other users. You can go to the "Account"
+            page to see your personal information such as your profile picture, your email address
+            and the username, also, you can change your username, email address and profile picture
+            whenever you want to. Next we have the "Create expense" page where you can create an 
+            expense report when you are there to create an expense report you have to fill all the 
+            fields, you can leave behind only the "Cost in EUR" and the "Cost in USD" those fields
+            are not required so you can leave the behind. Once the expense report is created it will be
+            showed up on the "Home" page where everybody can see it. When you navigate your self to the  
+            "Home" page you will see all the expenses there and the current status of the expense report.
+            If the current status is "Pending" then that means that is not being reviewed yet by a Manager.
+            Keep a close eye on your expense reports because they might be some changes on them by the Admin.
+            If you forget your password you can press on the forgot password email and you will be navigated 
+            on another page to put your email address there, once you put your email address there and click 
+            on the submit button you will receive an email on the email address that you put before. When you
+            you open that email a link will appear when you click on that address you will be navigated to a page
+            where you can choose a different password, click on the submit button and you are all done </p>
+
+        </div>
+    </div>
+{% endblock content %}
